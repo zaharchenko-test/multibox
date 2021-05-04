@@ -7,7 +7,7 @@ int cat_main(int argc, char **argv);
 int clear_main(int argc, char **argv);
 int date_main(int argc, char **argv);
 int dirname_main(int argc, char **argv);
-int echo_main(int argc, char **argv);
+int env_main(int argc, char **argv);
 int false_main(int argc, char **argv);
 int hostname_main(int argc, char **argv);
 int link_main(int argc, char **argv);
@@ -47,6 +47,7 @@ int multibox(int argc, char **argv, char *func_name)
   else if (strcmp(func_name, "basename") == 0) { return basename_main(argc, argv); }
   else if (strcmp(func_name, "clear") == 0) { return clear_main(argc, argv); }
   else if (strcmp(func_name, "dirname") == 0) { return dirname_main(argc, argv); }
+  else if (strcmp(func_name, "env") == 0) { return env_main(argc, argv); }
   else if (strcmp(func_name, "false") == 0) { return false_main(argc, argv); }
   else if (strcmp(func_name, "hostname") == 0) { return hostname_main(argc, argv); }
   else if (strcmp(func_name, "link") == 0) { return link_main(argc, argv); }
