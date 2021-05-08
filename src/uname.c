@@ -2,13 +2,22 @@
 #include <unistd.h>
 #include <sys/utsname.h>
 
+static void Print(char *word)
+{
+  static int header = 1;
+  if (!header) {
+    fputc(' ', stdout);
+  }
+  fputs(word, stdout);
+  header = 0;
+}
+
 int uname_main(int argc, char **argv)
 {
   struct utsname buffer;
   int opt, s=0, n=0, r=0, v=0, m=0, e=0;
-  if (uname(&buffer) < 0)
-  {
-    printf("error\n");
+  if (uname(&buffer) < 0) {
+    printf("uname: error\n");
   }
 
   while((opt = getopt(argc, argv, "::snrvma")) != -1)
@@ -38,30 +47,24 @@ int uname_main(int argc, char **argv)
     }
   }
 
-  if (e)
-  {
+  if (e || (argv[1] && (argv[1][0] != '-' || !argv[1][1]))) {
     printf("usage: uname [-asnrvm]\n");
     return 1;
   }
-  if (s || !(n || r || v || m))
-  {
-    printf("%s ", buffer.sysname);
+  if (s || !(n || r || v || m)) {
+    Print(buffer.sysname);
   }
-  if (n)
-  {
-    printf("%s ", buffer.nodename);
+  if (n) {
+    Print(buffer.nodename);
   }
-  if (r)
-  {
-    printf("%s ", buffer.release);
+  if (r) {
+    Print(buffer.release);
   }
-  if (v)
-  {
-    printf("%s ", buffer.version);
+  if (v) {
+    Print(buffer.version);
   }
-  if (m)
-  {
-    printf("%s", buffer.machine);
+  if (m) {
+    Print(buffer.machine);
   }
   putchar('\n');
 

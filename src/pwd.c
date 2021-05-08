@@ -9,14 +9,11 @@ static char *getpwd(void)
 {
   struct stat a, b;
   char *pwd;
-  if ((pwd = getenv("PWD")) != NULL && *pwd == '/')
-  {
-    if (stat(pwd, &a) == -1 || stat(".", &b) == -1)
-    {
+  if ((pwd = getenv("PWD")) != NULL && *pwd == '/') {
+    if (stat(pwd, &a) == -1 || stat(".", &b) == -1) {
       return (NULL);
     }
-    if (a.st_dev == b.st_dev && a.st_ino == b.st_ino)
-    {
+    if (a.st_dev == b.st_dev && a.st_ino == b.st_ino) {
       return (pwd);
     }
   }
@@ -44,19 +41,15 @@ int pwd_main(int argc, char **argv)
     }
   }
 
-  if (e || (argv[1] && argv[1][0] != '-'))
-  {
+  if (e || (argv[1] && (argv[1][0] != '-' || !argv[1][1]))) {
     printf("usage: pwd [-LP]\n");
     return 1;
   }
-
-  if ((!lp && (cwd = getpwd()) != NULL) || ((lp || errno == ENOENT) && (cwd = getcwd(NULL, 0)) != NULL))
-  {
+  if ((!lp && (cwd = getpwd()) != NULL) || ((lp || errno == ENOENT) && (cwd = getcwd(NULL, 0)) != NULL)) {
     printf("%s\n", cwd);
   }
-  else
-  {
-    printf("error\n");
+  else {
+    printf("pwd: error\n");
   }
   return 0;
 }

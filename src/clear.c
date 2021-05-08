@@ -1,12 +1,27 @@
 #include <stdio.h>
+#include <unistd.h>
 
 int clear_main(int argc, char **argv)
 {
-  if (argv[1] && argv[1][0] == '-')
+  int opt, x=1, e=0;
+  while((opt = getopt(argc, argv, "::x")) != -1)
   {
-    printf("usage: clear\n");
-    return 0;
+    switch(opt)
+    {
+      case 'x':
+        x = 0;
+        break;
+      case '?':
+        e = 1;
+    }
   }
-  printf("\033c\033[H\033[J");
+  if (e) {
+    printf("usage: clear [-x]\n");
+    return 1;
+  }
+  if (x) {
+    printf("\033c");
+  }
+  printf("\033[H\033[J");
   return 0;
 }

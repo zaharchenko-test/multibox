@@ -2,32 +2,15 @@
 
 int yes_main(int argc, char **argv)
 {
-  if (argv[1] && argv[1][0] == '-')
-  {
-    printf("usage: yes [string]...\n");
+  if (argv[1] && argv[1][0] == '-') {
+    printf("usage: yes [string]\n");
     return 0;
   }
-
-  char **pp;
-  argv[0] = (char*)"y";
-  if (argv[1])
-  {
-    ++argv;
+  if (!argv[1]) {
+    argv[1] = "y";
   }
-
-  do
-  {
-    pp = argv;
-    while (1)
-    {
-      fputs(*pp, stdout);
-      if (!*++pp)
-      {
-        break;
-      }
-      putchar(' ');
-    }
+  for (;;) {
+    printf("%s\n", argv[1]);
   }
-  while (putchar('\n') != EOF);
   return 1;
 }

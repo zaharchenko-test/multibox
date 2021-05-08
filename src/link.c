@@ -3,13 +3,11 @@
 
 int link_main(int argc, char **argv)
 {
-  if (argc != 3)
-  {
+  if (argc != 3) {
     printf("usage: link [target] [name]\n");
     return 1;
   }
-  if (link(argv[1], argv[2]) < 0)
-  {
+  if (link(argv[1], argv[2]) < 0) {
     printf("failed to create link\n");
     return 1;
   }

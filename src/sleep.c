@@ -4,10 +4,9 @@
 
 int sleep_main(int argc, char **argv)
 {
-  if (!argv[1])
-  {
+  if (argc != 2) {
     printf("usage: sleep [seconds]\n");
-    return 0;
+    return 1;
   }
   sleep(atoi(argv[1]));
   return 0;

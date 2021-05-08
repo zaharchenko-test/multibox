@@ -4,19 +4,16 @@
 
 int whoami_main(int argc, char **argv)
 {
-  if (argv[1] && argv[1][0] == '-')
-  {
+  if (argv[1]) {
     printf("usage: whoami\n");
-    return 0;
+    return 1;
   }
   uid_t uid = geteuid();
   struct passwd *pw = getpwuid(uid);
-  if (!pw)
-  {
-    printf("error\n");
+  if (!pw) {
+    printf("whoami: error\n");
     return 1;
   }
-
   printf("%s\n", pw->pw_name);
   return 0;
 }
