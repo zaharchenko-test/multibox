@@ -8,6 +8,6 @@ int sleep_main(int argc, char **argv)
     printf("usage: sleep [seconds]\n");
     return 1;
   }
-  sleep(atoi(argv[1]));
+  usleep(atof(argv[1])*1000000);
   return 0;
 }
