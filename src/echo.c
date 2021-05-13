@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+static int usage(void)
+{
+  printf("usage: echo [-n] [string]\n");
+  return 0;
+}
+
 int echo_main(int argc, char **argv)
 {
   int n = 0;
@@ -8,8 +14,7 @@ int echo_main(int argc, char **argv)
     n = 1, argc--, argv++;
   }
   else if(argv[1] && argv[1][0] == '-') {
-    printf("usage: echo [-n] [string]\n");
-    return 0;
+    return usage();
   }
   for (int i = 1; i < argc; i++) {
     static int first = 1;

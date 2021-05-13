@@ -15,12 +15,12 @@ static void Print(char *word)
 int uname_main(int argc, char **argv)
 {
   struct utsname buffer;
-  int opt, s=0, n=0, r=0, v=0, m=0, e=0;
+  int opt, s=0, n=0, r=0, v=0, m=0, o=0, e=0;
   if (uname(&buffer) < 0) {
     printf("uname: error\n");
   }
 
-  while((opt = getopt(argc, argv, "::snrvma")) != -1)
+  while((opt = getopt(argc, argv, "::asnrvmo")) != -1)
   {
     switch(opt)
     {
@@ -39,8 +39,11 @@ int uname_main(int argc, char **argv)
       case 'm':
         m = 1;
         break;
+      case 'o':
+        o = 1;
+        break;
       case 'a':
-        s = n = r = v = m = 1;
+        s = n = r = v = m = o = 1;
         break;
       case '?':
         e = 1;
@@ -48,10 +51,10 @@ int uname_main(int argc, char **argv)
   }
 
   if (e || (argv[1] && (argv[1][0] != '-' || !argv[1][1]))) {
-    printf("usage: uname [-asnrvm]\n");
+    printf("usage: uname [-asnrvmo]\n");
     return 1;
   }
-  if (s || !(n || r || v || m)) {
+  if (s || !(n || r || v || m || o)) {
     Print(buffer.sysname);
   }
   if (n) {
@@ -65,6 +68,9 @@ int uname_main(int argc, char **argv)
   }
   if (m) {
     Print(buffer.machine);
+  }
+  if (o) {
+    Print("Android");
   }
   putchar('\n');
 

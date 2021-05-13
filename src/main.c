@@ -12,11 +12,14 @@ int env_main(int argc, char **argv);
 int false_main(int argc, char **argv);
 int hostname_main(int argc, char **argv);
 int link_main(int argc, char **argv);
+int ln_main(int argc, char **argv);
 int logname_main(int argc, char **argv);
 int printenv_main(int argc, char **argv);
 int pwd_main(int argc, char **argv);
+int readlink_main(int argc, char **argv);
 int realpath_main(int argc, char **argv);
 int reset_main(int argc, char **argv);
+int rmdir_main(int argc, char **argv);
 int sleep_main(int argc, char **argv);
 int symlink_main(int argc, char **argv);
 int sync_main(int argc, char **argv);
@@ -62,6 +65,9 @@ int multibox(int argc, char **argv, char *func_name)
   else if (strcmp(func_name, "link") == 0) {
     return link_main(argc, argv);
   }
+  else if (strcmp(func_name, "ln") == 0) {
+    return ln_main(argc, argv);
+  }
   else if (strcmp(func_name, "logname") == 0) {
     return logname_main(argc, argv);
   }
@@ -71,11 +77,17 @@ int multibox(int argc, char **argv, char *func_name)
   else if (strcmp(func_name, "pwd") == 0) {
     return pwd_main(argc, argv);
   }
+  else if (strcmp(func_name, "readlink") == 0) {
+    return readlink_main(argc, argv);
+  }
   else if (strcmp(func_name, "realpath") == 0) {
     return realpath_main(argc, argv);
   }
   else if (strcmp(func_name, "reset") == 0) {
     return reset_main(argc, argv);
+  }
+  else if (strcmp(func_name, "rmdir") == 0) {
+    return rmdir_main(argc, argv);
   }
   else if (strcmp(func_name, "sleep") == 0) {
     return sleep_main(argc, argv);
@@ -116,8 +128,8 @@ int multibox(int argc, char **argv, char *func_name)
 
 int main(int argc, char **argv)
 {
-  int func = 24;
-  char *funv[] = {"arch","basename","clear","dirname","echo","env","false","hostname","link","logname","printenv","pwd","realpath","reset","sleep","symlink","sync","test","true","tty","uname","unlink","whoami","yes"};
+  int func = 27;
+  char *funv[] = {"arch","basename","clear","dirname","echo","env","false","hostname","link","ln","logname","printenv","pwd","readlink","realpath","reset","rmdir","sleep","symlink","sync","test","true","tty","uname","unlink","whoami","yes"};
   char *func_name = basename(argv[0]);
 
   if (strncmp(func_name, "multibox", 8) == 0) {

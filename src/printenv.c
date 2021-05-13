@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static int usage(void)
+{
+  printf("usage: printenv [var]...\n");
+  return 1;
+}
+
 int printenv_main(int argc, char **argv)
 {
   extern char **environ;
   char *var;
   int res = 0;
   if (argv[1] && argv[1][0] == '-') {
-    printf("usage: printenv [var]...\n");
-    return 1;
+    return usage();
   }
   if (!argv[1]) {
     for (; *environ; environ++) {
@@ -16,12 +21,11 @@ int printenv_main(int argc, char **argv)
     }
   } else {
     for (int i = 1; i < argc; i++) {
-      if ((var = getenv(argv[i]))) {
+      var = getenv(argv[i]);
+      if (var) {
         printf("%s\n", var);
-      } else {
-        res = 1;
       }
     }
   }
-  return res;
+  return 0;
 }

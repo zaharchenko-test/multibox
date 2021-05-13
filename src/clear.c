@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <unistd.h>
 
+static int usage(void)
+{
+  printf("usage: clear [-x]\n");
+  return 1;
+}
+
 int clear_main(int argc, char **argv)
 {
   int opt, x=1, e=0;
@@ -15,9 +21,8 @@ int clear_main(int argc, char **argv)
         e = 1;
     }
   }
-  if (e) {
-    printf("usage: clear [-x]\n");
-    return 1;
+  if (e || (argv[1][0] != '-')) {
+    return usage();
   }
   if (x) {
     printf("\033c");
