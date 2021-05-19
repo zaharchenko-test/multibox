@@ -4,15 +4,15 @@
 
 static int usage(void)
 {
-  printf("usage: sleep [seconds]\n");
+  printf("usage: usleep [microseconds]\n");
   return 1;
 }
 
-int sleep_main(int argc, char **argv)
+int usleep_main(int argc, char **argv)
 {
   if (argc != 2) {
     return usage();
   }
-  usleep(atof(argv[1])*1000000);
+  usleep(atof(argv[1]));
   return 0;
 }

@@ -28,6 +28,7 @@ int true_main(int argc, char **argv);
 int tty_main(int argc, char **argv);
 int uname_main(int argc, char **argv);
 int unlink_main(int argc, char **argv);
+int usleep_main(int argc, char **argv);
 int whoami_main(int argc, char **argv);
 int yes_main(int argc, char **argv);
 
@@ -113,6 +114,9 @@ int multibox(int argc, char **argv, char *func_name)
   else if (strcmp(func_name, "unlink") == 0) {
     return unlink_main(argc, argv);
   }
+  else if (strcmp(func_name, "usleep") == 0) {
+    return usleep_main(argc, argv);
+  }
   else if (strcmp(func_name, "whoami") == 0) {
     return whoami_main(argc, argv);
   }
@@ -128,48 +132,26 @@ int multibox(int argc, char **argv, char *func_name)
 
 int main(int argc, char **argv)
 {
-  int func = 27;
-  char *funv[] = {"arch","basename","clear","dirname","echo","env","false","hostname","link","ln","logname","printenv","pwd","readlink","realpath","reset","rmdir","sleep","symlink","sync","test","true","tty","uname","unlink","whoami","yes"};
+  int func = 28;
+  char *funv[] = {"arch","basename","clear","dirname","echo","env","false","hostname","link","ln","logname","printenv","pwd","readlink","realpath","reset","rmdir","sleep","symlink","sync","test","true","tty","uname","unlink","usleep","whoami","yes"};
   char *func_name = basename(argv[0]);
 
   if (strncmp(func_name, "multibox", 8) == 0) {
     if (!argv[1]) {
       printf("usage: multibox [function [arguments]...]\n");
     }
-    else if (argv[1][0] == '-') {
-      if (strcmp(argv[1], "-v") == 0) {
-        printf("multibox 0.07-zaharchenko\n");
-      }
-      else if (strcmp(argv[1], "-l") == 0) {
-        for (int i = 0; i < func; i++) {
-          printf("%s\n", funv[i]);
-        }
-      }
-      else if (strcmp(argv[1], "-i") == 0) {
-        if (argc != 3) {
-          printf("usage: multibox [-i] [dir]\n");
-        }
-        else {
-          for (int i = 0; i < func; i++) {
-            char buffer[BUFSIZ], *path = strdup(argv[2]);
-            int l = strlen(path)-1;
-            if (strcmp(&path[l], "/") != 0) {
-              strcat(path, "/");
-            }
-            readlink("/proc/self/exe", buffer, BUFSIZ);
-            symlink(buffer, strcat(path, funv[i]));
-          }
-        }
-      }
-      else {
-        printf("usage: multibox [-ilv]\n");
+    else if (strcmp(argv[1], "-v") == 0) {
+      printf("multibox 0.07-zaharchenko\n");
+    }
+    else if (strcmp(argv[1], "-l") == 0) {
+      for (int i = 0; i < func; i++) {
+        printf("%s\n", funv[i]);
       }
     }
     else {
       func_name = argv[1];
       argv[0] = NULL;
-      argv++;
-      argc--;
+      argv++, argc--;
       return multibox(argc, argv, func_name);
     }
   }

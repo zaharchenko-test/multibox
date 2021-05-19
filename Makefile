@@ -1,9 +1,10 @@
 MAKEFLAGS += --no-print-directory
+CC=gcc
 
 all:build
 
 build:
-	ndk-build
+	$(CC) -s -O3 -static src/*.c -o multibox
 
 clean:
 	rm -rf libs obj bin
