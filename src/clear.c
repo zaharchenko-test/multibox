@@ -9,22 +9,16 @@ static int usage(void)
 
 int clear_main(int argc, char **argv)
 {
-  int opt, x=1, e=0;
-  while((opt = getopt(argc, argv, "::x")) != -1)
-  {
-    switch(opt)
-    {
-      case 'x':
-        x = 0;
-        break;
-      case '?':
-        e = 1;
+  int x = 0;
+  if (argv[1]) {
+    if (argv[1][0]=='-' && argv[1][1]=='x' && argv[1][2]=='\0') {
+      x = 1;
+    }
+    else {
+      return usage();
     }
   }
-  if (e || (argv[1][0] != '-')) {
-    return usage();
-  }
-  if (x) {
+  if (!x) {
     printf("\033c");
   }
   printf("\033[H\033[J");

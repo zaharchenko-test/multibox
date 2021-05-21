@@ -140,10 +140,10 @@ int main(int argc, char **argv)
     if (!argv[1]) {
       printf("usage: multibox [function [arguments]...]\n");
     }
-    else if (strcmp(argv[1], "-v") == 0) {
+    else if (argv[1][0]=='-' && argv[1][1]=='v' && argv[1][2]=='\0') {
       printf("multibox 0.07-zaharchenko\n");
     }
-    else if (strcmp(argv[1], "-l") == 0) {
+    else if (argv[1][0]=='-' && argv[1][1]=='l' && argv[1][2]=='\0') {
       for (int i = 0; i < func; i++) {
         printf("%s\n", funv[i]);
       }

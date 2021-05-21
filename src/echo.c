@@ -10,7 +10,7 @@ static int usage(void)
 int echo_main(int argc, char **argv)
 {
   int n = 0;
-  if (argv[1] && !strcmp(argv[1], "-n")) {
+  if (argv[1] && argv[1][0]=='-' && argv[1][1]=='n' && argv[1][2]=='\0') {
     n = 1, argc--, argv++;
   }
   else if(argv[1] && argv[1][0] == '-') {
