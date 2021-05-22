@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int usage(void)
-{
-  printf("usage: env [-iu] [name=value]... [cmd [arg]...]\n");
-  return 1;
-}
-
 int env_main(int argc, char **argv)
 {
   extern char **environ;
@@ -33,8 +27,9 @@ int env_main(int argc, char **argv)
         e = 1;
     }
   }
-  if (e) {
-    return usage();
+  if (e || (argv[1] && argv[1][0] == '-')) {
+    printf("usage: env [-iu] [name=value]... [cmd [arg]...]\n");
+    return 1;
   }
   for (argv += optind; *argv && strchr(*argv, '='); argv++) {
     putenv(*argv);

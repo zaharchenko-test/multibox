@@ -2,16 +2,11 @@
 #include <stdlib.h>
 #include <limits.h>
 
-static int usage(void)
-{
-  printf("usage: realpath [files]...\n");
-  return 1;
-}
-
 int realpath_main(int argc, char **argv)
 {
   if (!argv[1]) {
-    return usage();
+    printf("usage: realpath [files]...\n");
+    return 1;
   }
   char buf[PATH_MAX];
   for (int i = 1; i < argc; i++) {

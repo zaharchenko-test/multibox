@@ -2,12 +2,6 @@
 #include <string.h>
 #include <unistd.h>
 
-static int usage(void)
-{
-  printf("usage: hostname [name]\n");
-  return 1;
-}
-
 int hostname_main(int argc, char **argv)
 {
   char host[BUFSIZ];
@@ -25,7 +19,8 @@ int hostname_main(int argc, char **argv)
     }
   }
   else {
-    return usage();
+    printf("usage: hostname [name]\n");
+    return 1;
   }
   return 0;
 }

@@ -2,16 +2,11 @@
 #include <stdio.h>
 #include <pwd.h>
 
-static int usage(void)
-{
-  printf("usage: whoami\n");
-  return 1;
-}
-
 int whoami_main(int argc, char **argv)
 {
   if (argv[1]) {
-    return usage();
+    printf("usage: whoami\n");
+    return 1;
   }
   uid_t uid = geteuid();
   struct passwd *pw = getpwuid(uid);

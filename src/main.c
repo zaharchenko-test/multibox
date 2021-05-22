@@ -132,21 +132,13 @@ int multibox(int argc, char **argv, char *func_name)
 
 int main(int argc, char **argv)
 {
-  int func = 28;
-  char *funv[] = {"arch","basename","clear","dirname","echo","env","false","hostname","link","ln","logname","printenv","pwd","readlink","realpath","reset","rmdir","sleep","symlink","sync","test","true","tty","uname","unlink","usleep","whoami","yes"};
   char *func_name = basename(argv[0]);
-
   if (strncmp(func_name, "multibox", 8) == 0) {
     if (!argv[1]) {
       printf("usage: multibox [function [arguments]...]\n");
     }
     else if (argv[1][0]=='-' && argv[1][1]=='v' && argv[1][2]=='\0') {
-      printf("multibox 0.07-zaharchenko\n");
-    }
-    else if (argv[1][0]=='-' && argv[1][1]=='l' && argv[1][2]=='\0') {
-      for (int i = 0; i < func; i++) {
-        printf("%s\n", funv[i]);
-      }
+      printf("multibox 0.08-zaharchenko\n");
     }
     else {
       func_name = argv[1];

@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int usage(void) {
-  printf("usage: readlink [-nfqs] [file]\n");
-  return 1;
-}
 int readlink_main(int argc, char **argv) {
   int opt, n=0, f=0, qs=0, e=0;
   while ((opt = getopt(argc, argv, "::nfqs")) != -1)
@@ -28,7 +24,8 @@ int readlink_main(int argc, char **argv) {
     }
   }
   if (e || (argc - optind != 1)) {
-    return usage();
+    printf("usage: readlink [-nfqs] [file]\n");
+    return 1;
   }
 
   char name[PATH_MAX];

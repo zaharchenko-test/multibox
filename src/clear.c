@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static int usage(void)
-{
-  printf("usage: clear [-x]\n");
-  return 1;
-}
-
 int clear_main(int argc, char **argv)
 {
   int x = 0;
@@ -15,7 +9,8 @@ int clear_main(int argc, char **argv)
       x = 1;
     }
     else {
-      return usage();
+      printf("usage: clear [-x]\n");
+      return 1;
     }
   }
   if (!x) {

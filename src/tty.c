@@ -2,17 +2,15 @@
 #include <unistd.h>
 #include <string.h>
 
-static int usage(void)
-{
-  printf("usage: tty [-s]\n");
-  return 1;
-}
-
 int tty_main(int argc, char **argv)
 {
   if (argv[1]) {
-    if (strcmp(argv[1], "-s") != 0) {
-      return usage();
+    if (argv[1][0] == '-' && argv[1][1] == 's' && argv[1][2] == '\0') {
+      return 0;
+    }
+    else {
+      printf("usage: tty [-s]\n");
+      return 1;
     }
   }
   else {

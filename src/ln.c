@@ -2,18 +2,9 @@
 #include <unistd.h>
 #include <string.h>
 
-static int usage(void)
-{
-    printf("usage: ln [-s] [target] [name]\n");
-    return 1;
-}
-
 int ln_main(int argc, char **argv)
 {
-  if (!argv[1]) {
-    return usage();
-  }
-  else if(strcmp(argv[1], "-s") == 0 && argc == 4) {
+  if(argc == 4 && strcmp(argv[1], "-s") == 0) {
     if (symlink(argv[2], argv[3]) < 0) {
       printf("failed to create symbolic link\n");
       return 1;
@@ -26,7 +17,8 @@ int ln_main(int argc, char **argv)
     }
   }
   else {
-    return usage();
+    printf("usage: ln [-s] [target] [name]\n");
+    return 1;
   }
   return 0;
 }
